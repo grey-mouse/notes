@@ -1,0 +1,425 @@
+\section{Иллюстрации.}
+
+Рассмотрим следующие примеры решения обыкновенных дифференциальных уравнений. Мы нашли их точное решение либо приближённое решение с помощью метода Рунге-Кутта четвёртого порядка и решение методом Лагранжа. Данные вычислений занесли в таблицы.
+
+\underline{Пример 1.}
+\begin{center}$y'=e^t+3t+y;~y(0)=0$ \end{center}
+
+1 способ. Найдём точное решение уравнения.
+
+\begin{equation*}
+\begin{aligned}
+&y'-y=e^t+3t\\
+1)~ & y'-y=0\\
+&\dfrac{dy}{dt}=y\\
+&\ln|y|=t+C\\
+&y=Ce^t\\
+2)~ & y(t)=C(t)e^t\\
+&y'(t)=C'(t)e^t+C(t)e^t\\
+\end{aligned}
+\end{equation*}
+
+Последние два выражения подставим в исходное уравнение:
+\begin{equation*}
+\begin{aligned}
+&C'(t)e^t+C(t)e^t=e^t+3t+C(t)e^t\\
+&C'(t)=1+3te^{-t}\\
+&C(t)=\int\left(1+3te^{-t}\right)dt=t-3\int tde^{-t}=t-3\left(te^{-t}-\int e^{-t}dt\right)\\
+&C(t)=t-3te^{-t}-3e^{-t}+C_1
+y=(t-3te^{-t}-3e^{-t}+C)e^t
+\end{aligned}
+\end{equation*}
+
+Получаем $y=te^t-3t-3+Ce^t.$
+
+Подставляя начальное условие, получим следующий ответ:
+$$
+y(t)=(t+3)e^t-3t-3.
+$$
+
+2 способ. Введём новую переменную по формуле $y_1=\dfrac{t^{k_1}}{y}$ или $y=\dfrac{t^{k_1}}{y_1}$.
+
+Находим $y_{10}$:
+$$
+y_{10}=\lim\limits_{t\to 0}\dfrac{t^{k_1}}{y}=\lim\limits_{t\to 0}\dfrac{k_1 t^{k_1-1}}{y'}.
+$$
+
+При $k_1=1~y_{10}=1.$
+
+Отсюда получаем, что $y=\dfrac{t}{y_1}.$
+
+Из последнего выражения для $y$ находим
+\begin{equation}
+\label{eq:pr11}
+y'=\dfrac{y_1-ty_1'}{y_1^2}.
+\end{equation}
+
+Подставим выражение \eqref{eq:pr11} в исходное уравнение:
+\begin{equation*}
+\begin{aligned}
+&\dfrac{y_1-ty_1'}{y_1^2}=e^t+3t+\dfrac{t}{y_1}\\
+&y_1-ty_1'=e^ty_1^2+3ty_1^2+ty_1\\
+&y_1'=\dfrac{y_1}{t}-\dfrac{e^ty_1^2}{t}-3y_1^2-y_1
+\end{aligned}
+\end{equation*}
+
+Таким образом получаем новое уравнение:
+\begin{equation}
+\label{eq:neweq2}
+y_1'=\dfrac{1}{t}(y_1-e^ty_1^2)-3y_1^2-y_1,~y_{10}=1.
+\end{equation}
+
+Опять введём новую переменную $y_2=\dfrac{t^{k_2}}{y_1-1}$ или 
+\begin{equation}
+\label{eq:newper}
+y_1=\dfrac{t^{k_2}}{y_2}+1
+\end{equation}
+
+Находим $y_{20}$:
+$$
+y_{20}=\lim\limits_{t\to 0}\dfrac{t^{k_2}}{y_1-1}=\lim\limits_{t\to 0}\dfrac{k_2 t^{k_2-1}}{y_1'}.
+$$
+
+Вычислим отдельно $\lim\limits_{t\to 0}y_1'$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_1'=\lim\limits_{t\to 0}\dfrac{1}{t}(y_1-e^ty_1^2)-3y_1^2-y_1=-4+\lim\limits_{t\to 0}(y_1'-e^ty_1^2-2e^ty_1y_1')\\
+&\lim\limits_{t\to 0}y_1'=-5-\lim\limits_{t\to 0}y_1'\\
+& 2\lim\limits_{t\to 0}y_1'=-5\\
+& \lim\limits_{t\to 0}y_1'=-\dfrac{5}{2}
+\end{aligned}
+\end{equation*}
+
+При $k_2=1~y_{20}=-\dfrac{2}{5}.$ Отсюда получаем, что $y_1=\dfrac{t}{y_2}+1.$
+
+Из выражения \eqref{eq:newper} $y_1'=\dfrac{y_2-ty_2'}{y_2^2}.$ Подставляем в уравнение \eqref{eq:neweq2}:
+\begin{equation*}
+\begin{aligned}
+&\dfrac{y_2-ty_2'}{y_2^2}=\dfrac{1}{t}\left(\dfrac{t}{y_2}+1-e^t\left(\dfrac{t}{y_2}+1\right)^2\right)-3\left(\dfrac{t}{y_2}+1\right)^2-\dfrac{t}{y_2}-1\\
+&\dfrac{y_2-ty_2'}{y_2^2}=\dfrac{1}{y_2}+\dfrac{1}{t}-\dfrac{te^t}{y_2^2}-\dfrac{2e^t}{y_2}-\dfrac{e^t}{t}-\dfrac{3t^2}{y_2^2}-\dfrac{7t}{y_2}-4\\
+& y_2-ty_2'=y_2+\dfrac{y_2^2}{t}-te^t-2e^ty_2-\dfrac{e^ty_2^2}{t}-3t^2-7ty_2-4y_2^2\\
+& y_2'=-\dfrac{y_2^2}{t^2}+e^t+2\dfrac{e^ty_2}{t}+\dfrac{e^ty_2^2}{t^2}+3t+7y_2+\dfrac{4y_2^2}{t}
+\end{aligned}
+\end{equation*}
+
+Таким образом, имеем дифференциальное уравнение:
+$$
+y_2'=e^t+3t+7y_2+\dfrac{1}{t}\left(2e^ty_2+\dfrac{4}{5}y_2^2\right)+\dfrac{1}{t^2}(-y_2^2+e^ty_2^2),~y_{20}=-\dfrac{2}{5}
+$$
+Опять введём новую переменную $y_3=\dfrac{t^{k_3}}{y_2+\dfrac{2}{5}}.$
+
+Находим $y_{30}:$
+$$
+y_{30}=\lim\limits_{t\to 0}\dfrac{t^{k_3}}{y_2+\dfrac{2}{5}}=\lim\limits_{t\to 0}\dfrac{k_3 t^{k_3-1}}{y_2'}.
+$$
+
+Рассмотрим отдельно $\lim\limits_{t\to 0}y_2'$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_2'=1-\dfrac{14}{5}+\lim\limits_{t\to 0}\dfrac{2e^ty_2+7y_2^2}{t}+\lim\limits_{t\to 0}\dfrac{-y_2^2+e^ty_2^2}{t^2}\\
+&\lim\limits_{t\to 0}y_2'=-\dfrac{11}{5}-\dfrac{2}{5}\lim\limits_{t\to 0}(2e^t+7y_2')+\dfrac{4}{25}\lim\limits_{t\to 0}\dfrac{e^t}{2t}\\
+& 5\lim\limits_{t\to 0}y_2'=-\dfrac{21}{5}\\
+& \lim\limits_{t\to 0}y_2'=-\dfrac{21}{25}
+\end{aligned}
+\end{equation*}
+
+При $k_3=1~y_{30}=-\dfrac{25}{21}$.
+ 
+Тогда решение данного уравнения представляется в виде следующей цепной дроби 
+\begin{equation*}
+y(t)= \dfrac{t}{1} \downplus \dfrac{t}{-\frac{2}{5}} \downplus \dfrac{t}{-\frac{25}{21}}\downplus \downdots
+\end{equation*}
+
+Откуда $y_{прибл}=\dfrac{21t^2+10t}{10-4t}$.
+
+Сравним решения, полученные первым и вторым способами. Результаты представлены в таблице:
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline
+$t$    & Точное      & Метод    & $t$    & Точное       & Метод\\
+     & решение & Лагранжа &      & решение & Лагранжа\\
+\hline
+\hline
+-1.0 & 0.7358      & 0.7332   & 0.1  & 0.1260      & 0.1260\\
+-0.9 & 0.5538      & 0.5522   & 0.2  & 0.3085      & 0.3085\\
+-0.8 & 0.3885      & 0.3876   & 0.3  & 0.5545      & 0.5545\\
+-0.7 & 0.2421      & 0.2416   & 0.4  & 0.8722      & 0.8723\\
+-0.6 & 0.1171      & 0.1169   & 0.5  & 1.2705      & 1.2707\\
+-0.5 & 0.0163      & 0.0162   & 0.6  & 1.7596      & 1.7601\\
+-0.4 & -0.0571     & -0.0572  & 0.7  & 2.3509      & 2.3520\\
+-0.3 & -0.0998     & -0.0998  & 0.8  & 3.0571      & 3.0593\\
+-0.2 & -0.1076     & -0.1076  & 0.9  & 3.8925      & 3.8966\\
+-0.1 & -0.0760     & -0.0760  & 1.0  & 4.8731      & 4.8805\\
+\hline
+\end{tabular}
+\end{center}
+
+\underline{Пример 2.}
+\begin{center}$y'=(2t+1)y'=4t+2y;~y(0)=2$ \end{center}
+
+1 способ. Найдём точное решение уравнения.
+
+\begin{equation*}
+\begin{aligned}
+&2ty'+y'-2y=4t\\
+1)~ & 2tdy+dy-2ydt=0\\
+&(2t+1)dy-2ydt=0\\
+&\dfrac{dy}{y}-\dfrac{2dt}{2t+1}=0\\
+&\ln |y|-2 \int \dfrac{dt}{2t+1}=C\\
+& \ln \left| \dfrac{y}{2t+1}\right|=C\\
+& y = C(2t+1)\\
+\end{aligned}
+\end{equation*}
+\begin{equation*}
+\begin{aligned}
+2)~ & y(t)=C(t)(2t+1)\\
+&y'(t)=C'(t)(2t+1)+2C(t)\\
+\end{aligned}
+\end{equation*}
+
+Последние два выражения подставим в исходное уравнение:
+\begin{equation*}
+\begin{aligned}
+&2tC'(t)(2t+1)+4tC(t)+C'(t)(2t+1)+2C(t)-2C(t)(2t+1)-4t=0\\
+&C'(t)=\dfrac{4t}{(2t+1)^2}\\
+&C(t)=\int \dfrac{4tdt}{(2t+1)^2}dt=\ln |2t+1|+\dfrac{1}{2t+1}+C_1\\
+\end{aligned}
+\end{equation*}
+
+Получаем $y(t)=(\ln |2t+1|+C)(2t+1)+1.$
+
+Подставляя начальное условие, получим следующий ответ:
+$$
+y(t)=(\ln |2t+1|+1)(2t+1)+1.
+$$
+
+2 способ. Введём новую переменную по формуле $y_1=\dfrac{t^{k_1}}{y-2}$~~~ или $y=\dfrac{t^{k_1}}{y_1}+2$.
+
+Находим $y_{10}$:
+$$
+y_{10}=\lim\limits_{t\to 0}\dfrac{t^{k_1}}{y-2}=\lim\limits_{t\to 0}\dfrac{k_1 t^{k_1-1}}{y'}.
+$$
+
+При $k_1=1~y_{10}=\dfrac{1}{4}.$
+
+Отсюда получаем, что $y=\dfrac{t}{y_1}+2.$
+
+Из последнего выражения для $y$ находим
+\begin{equation}
+\label{eq:pr21}
+y'=\dfrac{y_1-ty_1'}{y_1^2}.
+\end{equation}
+
+Подставим это выражение в исходное уравнение:
+\begin{equation*}
+\begin{aligned}
+&(2t+1)\dfrac{y_1-ty_1'}{y_1^2}=4t+2\left(2+\dfrac{t}{y_1}\right)\\
+&\dfrac{y_1-ty_1'}{y_1^2}=\dfrac{4t+4}{2t+1}+\dfrac{2t}{(2t+1)y_1}\\
+&ty_1'=y_1-\dfrac{4ty_1^2}{2t+1}-\dfrac{4y_1^2}{2t+1}-\dfrac{2ty_1}{2t+1}
+\end{aligned}
+\end{equation*}
+
+Таким образом получаем новое уравнение:
+\begin{equation}
+\label{eq:neweq3}
+y_1'=\dfrac{y_1}{t}-\dfrac{4y_1^2}{2t+1}-\dfrac{2y_1}{2t+1}=\dfrac{y_1-4y_1^2}{t(2t+1)},~y_{10}=\dfrac{1}{4}.
+\end{equation}
+
+Опять введём новую переменную $y_2=\dfrac{t^{k_2}}{y_1-\dfrac{1}{4}}$ или 
+\begin{equation}
+\label{eq:newper2}
+y_1=\dfrac{t^{k_2}}{y_2}+\dfrac{1}{4}
+\end{equation}
+
+Находим $y_{20}$:
+$$
+y_{20}=\lim\limits_{t\to 0}\dfrac{t^{k_2}}{y_1-\dfrac{1}{4}}=\lim\limits_{t\to 0}\dfrac{k_2 t^{k_2-1}}{y_1'}.
+$$
+
+Вычислим отдельно $\lim\limits_{t\to 0}y_1'(t)$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_1'=\lim\limits_{t\to 0}\dfrac{y_1-4y_1^2}{2t^2+t}-\dfrac{1}{4}=-\dfrac{1}{4}+\dfrac{1}{4}\lim\limits_{t\to 0}\dfrac{1-4y_1}{2t^2+t}\\
+&\lim\limits_{t\to 0}y_1'=-\dfrac{1}{4}-\lim\limits_{t\to 0}y_1'\\
+& 2\lim\limits_{t\to 0}y_1'=-\dfrac{1}{4}\\
+& \lim\limits_{t\to 0}y_1'=-\dfrac{1}{8}
+\end{aligned}
+\end{equation*}
+
+При $k_2=1~y_{20}=-8.$ Отсюда получаем, что $y_1=\dfrac{t}{y_2}+\dfrac{1}{4}.$
+
+Находим производную функции $y_1$: $y_1'=\dfrac{y_2-ty_2'}{y_2^2}.$ Подставляем в уравнение \eqref{eq:neweq3}:
+\begin{equation*}
+\begin{aligned}
+&\dfrac{y_2-ty_2'}{y_2^2}=\dfrac{1}{4t}+\dfrac{1}{y_2}-\dfrac{3}{4(2t+1)}-\dfrac{4t}{y_2(2t+1)}-\\
+&-\dfrac{4t^2}{y_2^2(2t+1)}-\dfrac{1}{4t(2t+1)}-\dfrac{2}{y_2(2t+1)}-\dfrac{4t}{y_2^2(2t+1)}\\
+\end{aligned}
+\end{equation*}
+
+Таким образом, имеем дифференциальное уравнение:
+$$
+y_2'=\dfrac{y_2^2}{4t(2t+1)}+\dfrac{4y_2}{2t+1}+\dfrac{4t}{2t+1}+\dfrac{2y_2}{t(2t+1)}+\dfrac{4}{2t+1},~y_{20}=-8.
+$$
+Опять введём новую переменную $y_3=\dfrac{t^{k_3}}{y_2+8}.$
+
+Находим $y_{30}:$
+$$
+y_{30}=\lim\limits_{t\to 0}\dfrac{t^{k_3}}{y_2+8}=\lim\limits_{t\to 0}\dfrac{k_3 t^{k_3-1}}{y_2'}.
+$$
+
+Рассмотрим отдельно $\lim\limits_{t\to 0}y_2'$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_2'=4\lim\limits_{t\to 0}\dfrac{y_2}{t+1}-2\lim\limits_{t\to 0}\dfrac{y_2+8}{t(2t+1)}\\
+&\lim\limits_{t\to 0}y_2'=-32-2\lim\limits_{t\to 0}y_2'\\
+& \lim\limits_{t\to 0}y_2'=-\dfrac{32}{3}
+\end{aligned}
+\end{equation*}
+
+При $k_3=1~y_{30}=-\dfrac{3}{32}$.
+ 
+Тогда решение данного уравнения представляется в виде следующей цепной дроби 
+\begin{equation*}
+y(t)= 2+\dfrac{t}{\frac{1}{4}} \downplus \dfrac{t}{-8} \downplus \dfrac{t}{-\frac{3}{32}}\downplus \downdots
+\end{equation*}
+
+Откуда $y_{прибл}=\dfrac{32t^2+34t+12}{5t+6}$.
+
+Сравним решения, полученные первым и вторым способами. Результаты представлены в таблице:
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline
+$t$    & Точное      & Метод    & $t$    & Точное       & Метод\\
+     & решение & Лагранжа &      & решение & Лагранжа\\
+\hline
+\hline
+-1.0 & 10.0026      & 10.0000   & 0.1  & 2.1485      & 2.4185\\
+-0.9 & 4.8816      & 4.8800   & 0.2  & 2.8686      & 2.8686\\
+-0.8 & 2.6409      & 2.6400   & 0.3  & 3.4400      & 3.4400\\
+-0.7 & 1.5525      & 1.5520   & 0.4  & 3.8399      & 3.8400\\
+-0.6 & 1.0402      & 1.0400   & 0.5  & 4.3527      & 4.3529\\
+-0.5 & 0.8572      & 0.8571   & 0.6  & 4.8795      & 4.8800\\
+-0.4 & 0.8799     & 0.8800  & 0.7  & 5.4178      & 5.4189\\
+-0.3 & 1.0400     & 1.0400  & 0.8  & 5.9658      & 5.9680\\
+-0.2 & 1.2960     & 1.2960  & 0.9  & 6.5216      & 6.5257\\
+-0.1 & 1.6218     & 1.6218  & 1.0  & 7.0853      & 7.0909\\
+\hline
+\end{tabular}
+\end{center}
+
+\newpage
+\underline{Пример 3.} 
+\begin{center}$y'=\sin y+\cos y;~y(0)=0$ \end{center}
+
+Решение. Введём новую переменную по формуле $y_1=\dfrac{t^{k_1}}{y}$~~~ или $y=\dfrac{t^{k_1}}{y_1}$.
+
+Находим $y_{10}$:
+$$
+y_{10}=\lim\limits_{t\to 0}\dfrac{t^{k_1}}{y}=\lim\limits_{t\to 0}\dfrac{k_1 t^{k_1-1}}{y'}.
+$$
+
+При $k_1=1~y_{10}=1.$
+
+Отсюда получаем, что $y=\dfrac{t}{y_1}.$
+
+Из последнего выражения для $y$ находим
+\begin{equation}
+\label{eq:pr31}
+y'=\dfrac{y_1-ty_1'}{y_1^2}.
+\end{equation}
+
+Подставим это выражение в исходное уравнение:
+\begin{equation*}
+\begin{aligned}
+&\dfrac{y_1-ty_1'}{y_1^2}=\sin \dfrac{t}{y_1}+\cos \dfrac{t}{y_1}\\
+&y_1-ty_1'=y_1^2\left(\sin \dfrac{t}{y_1}+\cos\dfrac{t}{y_1}\right)\\
+\end{aligned}
+\end{equation*}
+
+Таким образом получаем новое уравнение:
+\begin{equation}
+\label{eq:neweq4}
+y_1'=\dfrac{y_1}{t}-\dfrac{y_1^2}{t}\left(\sin \dfrac{t}{y_1}+\cos\dfrac{t}{y_1}\right),~y_{10}=1.
+\end{equation}
+
+Опять введём новую переменную $y_2=\dfrac{t^{k_2}}{y_1-1}$ или 
+\begin{equation}
+\label{eq:newper2}
+y_1=\dfrac{t^{k_2}}{y_2}+1
+\end{equation}
+
+Находим $y_{20}$:
+$$
+y_{20}=\lim\limits_{t\to 0}\dfrac{t^{k_2}}{y_1-1}=\lim\limits_{t\to 0}\dfrac{k_2 t^{k_2-1}}{y_1'}.
+$$
+
+Вычислим отдельно $\lim\limits_{t\to 0}y_1'(t)$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_1'=\lim\limits_{t\to 0}\dfrac{y_1-y_1^2\left(\sin \dfrac{t}{y_1}+\cos\dfrac{t}{y_1}\right)}{t}\\
+&\lim\limits_{t\to 0}y_1'=\lim\limits_{t\to 0}\dfrac{y_1(1-y_1)}{t}=\lim\limits_{t\to 0}(y_1'(1-y_1)-y_1y_1')\\
+& 2\lim\limits_{t\to 0}y_1'=-1\\
+& \lim\limits_{t\to 0}y_1'=-\dfrac{1}{2}
+\end{aligned}
+\end{equation*}
+
+При $k_2=1~y_{20}=-2.$ Отсюда получаем, что $y_1=\dfrac{t}{y_2}+1.$
+
+Находим производную функции $y_1$: $y_1'=\dfrac{y_2-ty_2'}{y_2^2}.$ Подставляем в уравнение \eqref{eq:neweq4}:
+\begin{equation*}
+\begin{aligned}
+&\dfrac{y_2-ty_2'}{y_2^2}=\dfrac{1}{t}\left( \dfrac{t}{y_2}+1-\left(\dfrac{t}{y_2}\right)^2\left( \sin\dfrac{t}{\dfrac{t}{y_2}+1}+\cos\dfrac{t}{\dfrac{t}{y_2}+1}\right)\right)\\
+&y_2-ty_2'=\dfrac{y_2^2}{t}\left(\dfrac{t}{y_2}+1+\left(\dfrac{t^2}{y_2^2}+\dfrac{2t}{y_2}+1\right)\left(\sin\dfrac{ty_2}{t+y_2}+\cos \dfrac{ty_2}{t+y_2}\right)\right)\\
+\end{aligned}
+\end{equation*}
+
+Таким образом, имеем дифференциальное уравнение:
+$$
+y_2'=-\dfrac{1}{t}-\left(\dfrac{t}{y_2^2}+\dfrac{2}{y_2}+\dfrac{1}{t}\right)\left(\sin\dfrac{ty_2}{t+y_2}+\cos \dfrac{ty_2}{t+y_2}\right),~y_{20}=-2.
+$$
+Опять введём новую переменную $y_3=\dfrac{t^{k_3}}{y_2+2}.$
+
+Находим $y_{30}:$
+$$
+y_{30}=\lim\limits_{t\to 0}\dfrac{t^{k_3}}{y_2+2}=\lim\limits_{t\to 0}\dfrac{k_3 t^{k_3-1}}{y_2'}.
+$$
+
+Рассмотрим отдельно $\lim\limits_{t\to 0}y_2'$:
+\begin{equation*}
+\begin{aligned}
+&\lim\limits_{t\to 0}y_2'=\lim\limits_{t\to 0}\dfrac{-1-\left(\dfrac{t^2}{y_2^2}+\dfrac{2t}{y_2}+1\right)\left(\sin\dfrac{ty_2}{t+y_2}+\cos \dfrac{ty_2}{t+y_2}\right)}{t}\\
+&\lim\limits_{t\to 0}y_2'=\lim\limits_{t\to 0}\dfrac{-1-\sin\dfrac{ty_2}{t+y_2}-1}{t}\\
+&\lim\limits_{t\to 0}y_2'=-2-\lim\limits_{t\to 0}y_2'\\
+& \lim\limits_{t\to 0}y_2'=-1
+\end{aligned}
+\end{equation*}
+
+При $k_3=1~y_{30}=-1$.
+Тогда решение данного уравнения представляется в виде следующей цепной дроби 
+\begin{equation*}
+y(t)= \dfrac{t}{1} \downplus \dfrac{t}{-2} \downplus \dfrac{t}{-1}\downplus \downdots
+\end{equation*}
+
+Откуда $y_{прибл}=\dfrac{2t+t^2}{2}$.
+
+Сравним решения, полученные первым и вторым способами. Результаты представлены в таблице:
+\begin{center}
+\begin{tabular}{|c|c|c||c|c|c|}
+\hline
+$t$    & Метод       & Метод    & $t$    & Метод       & Метод\\
+     & Рунге-Кутта & Лагранжа &      & Рунге-Кутта & Лагранжа\\
+\hline
+\hline
+-1.0 & -0.5847      & -0.5714   & 0.1  & 0.1050      & 0.1050\\
+-0.9 & -0.5544      & -0.5446   & 0.2  & 0.2197      & 0.2198\\
+-0.8 & -0.5197      & -0.5128   & 0.3  & 0.3434      & 0.3438\\
+-0.7 & -0.4800      & -0.4754   & 0.4  & 0.4748      & 0.4762\\
+-0.6 & -0.4344      & -0.4317   & 0.5  & 0.6120      & 0.6154\\
+-0.5 & -0.3825      & -0.3810   & 0.6  & 0.7526      & 0.7595\\
+-0.4 & -0.3233     & -0.3226  & 0.7  & 0.8938      & 0.9061\\
+-0.3 & -0.2561     & -0.2559  & 0.8  & 1.0328      & 1.0526\\
+-0.2 & -0.1802     & -0.1801  & 0.9  & 1.1672      & 1.1960\\
+-0.1 & -0.0950     & -0.0950  & 1.0  & 1.2947      & 1.3333\\
+\hline
+\end{tabular}
+\end{center}

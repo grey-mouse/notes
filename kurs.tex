@@ -1,0 +1,57 @@
+\documentclass[14pt,a4paper,oneside]{extarticle}
+\usepackage{mathtext}
+\usepackage{amsmath}
+\DeclareMathOperator{\tg}{tg}
+\DeclareMathOperator{\arctg}{arctg}
+\usepackage{amssymb}
+\usepackage[T2A]{fontenc}
+\usepackage[cp1251]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+
+\usepackage{geometry} % Меняем поля страницы
+\geometry{left=3cm} % левое поле
+\geometry{right=1.5cm} % правое поле
+\geometry{top=2cm} % верхнее поле
+\geometry{bottom=2cm} % нижнее поле
+
+\newcommand{\mykeyword}{\textit}  % способ выделения ключевых слов
+\newcommand{\downplus}{\genfrac{}{}{0pt}{0}{}{~+~}}  % используется в формулах "+" снизу
+\newcommand{\downminus}{\genfrac{}{}{0pt}{0}{}{~-~}}  % используется в формулах "-" снизу
+\newcommand{\downdots}{\genfrac{}{}{0pt}{0}{}{\hdots}}  % многоточие снизу
+\newcommand{\podpunkt}{\medskip \underline} % выделяем подпунктики:)
+\newcommand{\tocsecindent}{\hspace{7mm}}  % отступы
+%\newcommand{\nja}[2]{\genfrac{}{}{0pt}{0}{#1}{#2}} %этажи
+\addto\captionsrussian{\def\refname{}}
+\renewcommand{\baselinestretch}{1.5}
+%\makeatletter
+%\renewcommand{\@biblabel}[1]{#1.} %заменяем библиографию с [] на точку
+%\makeatother
+
+\begin{document}
+
+\input{mytitle}
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagestyle{myheadings}
+\markright{}
+\input{intro}
+\newpage
+\input{chapter1}
+\newpage
+\input{chapter2}
+\newpage
+\input{chapter3}
+\newpage
+\input{chapter4}
+\newpage
+\input{theend}
+\newpage
+\input{lit}
+%\addcontentsline{toc}{section}{\tocsecindent{Литература}}
+%\bibliographystyle{gost780u}
+%\bibliography{kurs}
+\end{document}
