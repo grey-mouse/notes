@@ -1,2 +1,2 @@
 # notes
-different things
+My thesis in LaTex
